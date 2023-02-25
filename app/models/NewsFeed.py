@@ -1,4 +1,4 @@
-import os
+from dotenv import dotenv_values
 import requests
 
 class NewsFeed:
@@ -9,4 +9,10 @@ class NewsFeed:
         self.data = data
 
     def get(self):
-        pass
+        url = ('https://newsapi.org/v2/everything?'
+               'q=Apple&'
+               'from=2023-02-23&'
+               'sortBy=popularity&'
+               f'apiKey={dotenv_values(".env")["NEWS_API_KEY"]}')
+        res = requests.get(url)
+        return res.json()
